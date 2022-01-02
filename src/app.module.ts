@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import { AvengersModule } from './avengers/avengers.module';
+import { Avenger } from 'src/avengers/entities/avenger.entity';
 
 @Module({
   imports: [
@@ -28,8 +29,9 @@ import { AvengersModule } from './avengers/avengers.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      synchronize: true,
-      logging: true,
+      synchronize: process.env.NODE_ENV !== 'production',
+      logging: process.env.NODE_ENV !== 'production',
+      entities: [Avenger],
       // more options 1 -  https://typeorm.io/#/connection-options/common-connection-options
       // more options 2 -  https://typeorm.io/#/connection-options/postgres--cockroachdb-connection-options
     }),
