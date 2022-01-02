@@ -1,11 +1,16 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AvengersModule } from './avengers/avengers.module';
 
+console.log(process.env.NODE_ENV);
 @Module({
   imports: [
-    AvengersModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'development' ? '.env.development' : '.env.test',
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -23,6 +28,7 @@ import { AvengersModule } from './avengers/avengers.module';
       // debug: false,
       // more options - https://www.apollographql.com/docs/apollo-server/v2/api/apollo-server/#constructor-options-lt-ApolloServer-gt
     }),
+    AvengersModule,
   ],
   controllers: [],
   providers: [],
