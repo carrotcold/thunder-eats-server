@@ -13,7 +13,10 @@ export class AvengersResolver {
   }
 
   @Mutation(returns => Boolean)
-  async createAvenger(@Args() create_avenger_dto: CreateAvengerDto): Promise<boolean> {
+  async createAvenger(
+    @Args('input')
+    create_avenger_dto: CreateAvengerDto,
+  ): Promise<boolean> {
     try {
       await this.avengersService.createAvenger(create_avenger_dto);
       return true;
