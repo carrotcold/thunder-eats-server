@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateAvengerDto } from 'src/avengers/dtos/create-avenger.dto';
+import { UpdateAvengerDto } from 'src/avengers/dtos/update-avenger.dto';
 import { Avenger } from 'src/avengers/entities/avenger.entity';
 import { Repository } from 'typeorm';
 
@@ -20,5 +21,9 @@ export class AvengersService {
     // new_avenger.name = dto.name;
     const new_avenger = this.avengers.create(create_avenger_dto);
     return this.avengers.save(new_avenger);
+  }
+
+  updateAvenger({ id, data }: UpdateAvengerDto) {
+    return this.avengers.update(id, { ...data });
   }
 }
