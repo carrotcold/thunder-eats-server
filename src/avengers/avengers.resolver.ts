@@ -11,8 +11,15 @@ export class AvengersResolver {
   avengers(): Promise<Avenger[]> {
     return this.avengersService.getAll();
   }
+
   @Mutation(returns => Boolean)
-  createAvenger(@Args() dto: CreateAvengerDto): boolean {
-    return true;
+  async createAvenger(@Args() create_avenger_dto: CreateAvengerDto): Promise<boolean> {
+    try {
+      await this.avengersService.createAvenger(create_avenger_dto);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }

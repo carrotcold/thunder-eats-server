@@ -14,11 +14,11 @@ export class Avenger {
 
   @Field(type => Boolean)
   @Column()
-  isHuman: boolean;
+  is_human: boolean;
 
   @Field(type => Boolean, { nullable: true })
   @Column()
-  isTransformable?: boolean;
+  is_transformable?: boolean;
 
   @Field(type => String, { nullable: true })
   @Column()

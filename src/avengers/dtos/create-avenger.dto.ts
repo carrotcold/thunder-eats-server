@@ -11,11 +11,11 @@ export class CreateAvengerDto {
 
   @Field(type => Boolean)
   @IsBoolean()
-  isHuman: boolean;
+  is_human: boolean;
 
   @Field(type => Boolean)
   @IsBoolean()
-  isTransformable: boolean;
+  is_transformable: boolean;
 
   @Field(type => String)
   @IsString()
