@@ -10,7 +10,7 @@ export class User extends CoreEntity {
 
   @Column()
   password: string;
-  r;
+
   @Column()
   role: UserRole;
 }

@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import Joi from 'joi';
+import * as Joi from 'joi';
 
 import { CommonModule } from '@src/common/common.module';
 import { UsersModule } from '@src/users/users.module';
+import { User } from '@src/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { UsersModule } from '@src/users/users.module';
       database: process.env.DB_DATABASE,
       synchronize: process.env.NODE_ENV !== 'production',
       logging: process.env.NODE_ENV !== 'production',
-      entities: [],
+      entities: [User],
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
