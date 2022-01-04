@@ -1,8 +1,8 @@
 import { InputType, OmitType } from '@nestjs/graphql';
-import { Avenger } from 'src/avengers/entities/avenger.entity';
+import { Avenger } from 'avengers/entities/avenger.entity';
 
-@InputType() // input을 하나의 object 형태로
 // @ArgsType() // 각각의 arguments로
+@InputType() // input을 하나의 object 형태로
 export class CreateAvengerDto extends OmitType(
   Avenger,
   ['id'] as const,

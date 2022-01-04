@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateAvengerDto } from 'src/avengers/dtos/create-avenger.dto';
-import { UpdateAvengerDto } from 'src/avengers/dtos/update-avenger.dto';
-import { Avenger } from 'src/avengers/entities/avenger.entity';
+import { UpdateAvengerDto } from 'avengers/dtos/update-avenger.dto';
+import { Avenger } from 'avengers/entities/avenger.entity';
 import { Repository } from 'typeorm';
+import { CreateAvengerDto } from 'avengers/dtos/create-avenger.dto';
 
 @Injectable()
 export class AvengersService {

@@ -3,8 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
-import { AvengersModule } from './avengers/avengers.module';
-import { Avenger } from 'src/avengers/entities/avenger.entity';
+
+import { User } from 'user/entities/user.entity';
+import { CommonModule } from 'common/common.module';
+import { UsersModule } from 'user/user.module';
 
 @Module({
   imports: [
@@ -31,7 +33,7 @@ import { Avenger } from 'src/avengers/entities/avenger.entity';
       database: process.env.DB_DATABASE,
       synchronize: process.env.NODE_ENV !== 'production',
       logging: process.env.NODE_ENV !== 'production',
-      entities: [Avenger],
+      entities: [User], // NOTE: TypeOrmModule에 DB로 전송할 entity들 설정
       // more options 1 -  https://typeorm.io/#/connection-options/common-connection-options
       // more options 2 -  https://typeorm.io/#/connection-options/postgres--cockroachdb-connection-options
     }),
@@ -40,7 +42,8 @@ import { Avenger } from 'src/avengers/entities/avenger.entity';
       // debug: false,
       // more options - https://www.apollographql.com/docs/apollo-server/v2/api/apollo-server/#constructor-options-lt-ApolloServer-gt
     }),
-    AvengersModule,
+    CommonModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

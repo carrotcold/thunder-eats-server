@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Avenger } from 'src/avengers/entities/avenger.entity';
-import { AvengersResolver } from 'src/avengers/avengers.resolver';
-import { AvengersService } from 'src/avengers/avengers.service';
+import { AvengersResolver } from 'avengers/avengers.resolver';
+import { AvengersService } from 'avengers/avengers.service';
+import { Avenger } from 'avengers/entities/avenger.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Avenger])], // import repository (https://docs.nestjs.com/techniques/database#repository-pattern)

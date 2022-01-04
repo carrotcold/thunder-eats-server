@@ -1,8 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Avenger } from 'src/avengers/entities/avenger.entity';
-import { CreateAvengerDto } from 'src/avengers/dtos/create-avenger.dto';
-import { AvengersService } from 'src/avengers/avengers.service';
-import { UpdateAvengerDto } from 'src/avengers/dtos/update-avenger.dto';
+import { Avenger } from 'avengers/entities/avenger.entity';
+import { AvengersService } from 'avengers/avengers.service';
+import { CreateAvengerDto } from 'avengers/dtos/create-avenger.dto';
+import { UpdateAvengerDto } from 'avengers/dtos/update-avenger.dto';
 
 @Resolver(of => Avenger)
 export class AvengersResolver {
