@@ -4,8 +4,18 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
+  plugins: ['@typescript-eslint/eslint-plugin', 'import'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+    'plugin:import/recommended',
+    'prettier',
+  ],
   root: true,
   env: {
     node: true,
@@ -17,5 +27,11 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    'import/order': [
+      'error',
+      {
+        groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
+      },
+    ],
   },
 };
