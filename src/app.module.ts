@@ -7,6 +7,7 @@ import * as Joi from 'joi';
 import { CommonModule } from 'src/common/common.module';
 import { UsersModule } from 'src/users/users.module';
 import { User } from 'src/users/entities/user.entity';
+import { JwtModule } from 'src/jwt/jwt.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { User } from 'src/users/entities/user.entity';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
     }),
+    JwtModule.forRoot(),
     CommonModule,
     UsersModule,
   ],

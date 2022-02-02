@@ -9,6 +9,7 @@ import {
   CreateUserAccountOutput,
 } from 'src/users/dtos/create-user-acoount.dto';
 import { LoginInput, LoginOutput } from 'src/users/dtos/login.dto';
+import { JwtService } from 'src/jwt/jwt.service';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +17,10 @@ export class UsersService {
     @InjectRepository(User)
     private readonly usersRepo: Repository<User>,
     private readonly configService: ConfigService,
-  ) {}
+    private readonly jwtService: JwtService,
+  ) {
+    jwtService.hello();
+  }
 
   async createUserAccount({
     email,
