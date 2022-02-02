@@ -21,7 +21,7 @@ import { User } from '@src/users/entities/user.entity';
         DB_PORT: Joi.string().required(),
         DB_USERNAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
-        DB_DATABASE: Joi.string().required(),
+        DB_NAME: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRoot({
@@ -30,7 +30,7 @@ import { User } from '@src/users/entities/user.entity';
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'production',
       logging: process.env.NODE_ENV !== 'production',
       entities: [User],
