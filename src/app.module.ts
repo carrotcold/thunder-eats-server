@@ -10,6 +10,7 @@ import { User } from '@src/users/entities/user.entity';
 
 @Module({
   imports: [
+    // forRoot: DynamicModule을 리턴하는 정적 메서드
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath:
@@ -22,8 +23,10 @@ import { User } from '@src/users/entities/user.entity';
         DB_USERNAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
         DB_NAME: Joi.string().required(),
+        SECRET_KEY: Joi.string().required(),
       }),
     }),
+    // TODO: registerAs 이용하여 리팩토링
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
