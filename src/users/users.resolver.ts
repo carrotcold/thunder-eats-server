@@ -2,10 +2,10 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import {
   CreateUserAccountInput,
   CreateUserAccountOutput,
-} from '@src/users/dtos/create-user-acoount.dto';
-import { LoginInput, LoginOutput } from '@src/users/dtos/login.dto';
-import { User } from '@src/users/entities/user.entity';
-import { UsersService } from '@src/users/users.service';
+} from 'src/users/dtos/create-user-acoount.dto';
+import { LoginInput, LoginOutput } from 'src/users/dtos/login.dto';
+import { User } from 'src/users/entities/user.entity';
+import { UsersService } from 'src/users/users.service';
 
 @Resolver(of => User)
 export class UsersResolver {

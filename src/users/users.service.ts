@@ -1,18 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '@src/users/entities/user.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   CreateUserAccountInput,
   CreateUserAccountOutput,
-} from '@src/users/dtos/create-user-acoount.dto';
-import { LoginInput, LoginOutput } from '@src/users/dtos/login.dto';
+} from 'src/users/dtos/create-user-acoount.dto';
+import { LoginInput, LoginOutput } from 'src/users/dtos/login.dto';
+import { JwtService } from 'src/jwt/jwt.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepo: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async createUserAccount({
@@ -45,7 +47,8 @@ export class UsersService {
         return { ok: false, error: '잘못된 패스워드입니다.' };
       }
 
-      return { ok: true, token: '토큰' };
+      const token = this.jwtService.sign(user.id);
+      return { ok: true, token };
     } catch (error) {
       return { ok: false, error };
     }

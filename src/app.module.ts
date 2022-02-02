@@ -4,12 +4,14 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 
-import { CommonModule } from '@src/common/common.module';
-import { UsersModule } from '@src/users/users.module';
-import { User } from '@src/users/entities/user.entity';
+import { CommonModule } from 'src/common/common.module';
+import { UsersModule } from 'src/users/users.module';
+import { User } from 'src/users/entities/user.entity';
+import { JwtModule } from 'src/jwt/jwt.module';
 
 @Module({
   imports: [
+    // forRoot: DynamicModule을 리턴하는 정적 메서드
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath:
@@ -22,8 +24,10 @@ import { User } from '@src/users/entities/user.entity';
         DB_USERNAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
         DB_NAME: Joi.string().required(),
+        SECRET_KEY: Joi.string().required(),
       }),
     }),
+    // TODO: registerAs 이용하여 리팩토링
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -38,6 +42,7 @@ import { User } from '@src/users/entities/user.entity';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
     }),
+    JwtModule.forRoot({ secretKey: process.env.SECRET_KEY ?? '' }),
     CommonModule,
     UsersModule,
   ],
