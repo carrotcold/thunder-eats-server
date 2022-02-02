@@ -3,12 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
 import * as jwt from 'jsonwebtoken';
-import { User } from '@src/users/entities/user.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   CreateUserAccountInput,
   CreateUserAccountOutput,
-} from '@src/users/dtos/create-user-acoount.dto';
-import { LoginInput, LoginOutput } from '@src/users/dtos/login.dto';
+} from 'src/users/dtos/create-user-acoount.dto';
+import { LoginInput, LoginOutput } from 'src/users/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
