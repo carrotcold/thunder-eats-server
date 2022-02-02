@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '@src/users/entities/user.entity';
-import { CreateUserAccountInput } from '@src/users/dtos/create-user-acoount.dto';
+import {
+  CreateUserAccountInput,
+  CreateUserAccountOutput,
+} from '@src/users/dtos/create-user-acoount.dto';
+import { LoginInput, LoginOutput } from '@src/users/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
@@ -15,17 +19,35 @@ export class UsersService {
     email,
     password,
     role,
-  }: CreateUserAccountInput): Promise<string | undefined> {
+  }: CreateUserAccountInput): Promise<CreateUserAccountOutput> {
     try {
       const exists = await this.usersRepo.findOne({ email });
       if (exists) {
-        return '이미 사용 중인 이메일 입니다.';
+        return { ok: false, error: '이미 사용 중인 이메일 입니다.' };
       }
       const newUser = this.usersRepo.create({ email, password, role });
       await this.usersRepo.save(newUser);
+      return { ok: true };
     } catch (error) {
-      return '계정을 생성하지 못했습니다.';
+      return { ok: false, error: '계정을 생성하지 못했습니다.' };
     }
-    // TODO: hash the password
+  }
+
+  async login({ email, password }: LoginInput): Promise<LoginOutput> {
+    try {
+      const user = await this.usersRepo.findOne({ email });
+      if (!user) {
+        return { ok: false, error: '존재하지 않는 이메일입니다.' };
+      }
+
+      const isCorrectPassword = await user.checkPassword(password);
+      if (!isCorrectPassword) {
+        return { ok: false, error: '잘못된 패스워드입니다.' };
+      }
+
+      return { ok: true, token: '토큰' };
+    } catch (error) {
+      return { ok: false, error };
+    }
   }
 }
