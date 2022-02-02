@@ -11,7 +11,11 @@ export class UsersService {
     private readonly usersRepo: Repository<User>,
   ) {}
 
-  async createUserAccount({ email, password, role }: CreateUserAccountInput): Promise<string | undefined> {
+  async createUserAccount({
+    email,
+    password,
+    role,
+  }: CreateUserAccountInput): Promise<string | undefined> {
     try {
       const exists = await this.usersRepo.findOne({ email });
       if (exists) {

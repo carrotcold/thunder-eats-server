@@ -12,7 +12,8 @@ import { User } from '@src/users/entities/user.entity';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: process.env.NODE_ENV === 'development' ? '.env.development.local' : '.env.test.local',
+      envFilePath:
+        process.env.NODE_ENV === 'development' ? '.env.development.local' : '.env.test.local',
       ignoreEnvFile: process.env.NODE_ENV === 'production',
       validationSchema: Joi.object({
         NODE_ENV: Joi.string().valid('development', 'production', 'test').required(),
